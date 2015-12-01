@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.0.5",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "mysql": "^2.9.0",
@@ -23,7 +24,8 @@
     "gulp-coffee": "^2.3.1",
     "gulp-jasmine": "^2.2.1",
     "gulp-watch": "^4.3.5",
-    "jasmine-given": "^2.6.3",
+    "jasmine": "^2.3.2",
+    "jasmine-node": "^1.14.5",
     "sandboxed-module": "^0.3.0"
   }
 }
