@@ -1,7 +1,8 @@
-server = require __dirname + '/../../../build/server.js'
 process.env.NODE_ENV = 'test'
+server = require __dirname + '/../../../build/server.js'
 
-beforeEach ->
+beforeAll ->
   server.start({quiet: true})
-afterEach ->
+
+afterAll ->
   server.stop()
