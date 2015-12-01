@@ -1,34 +1,26 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import bookRoutes from './books/routes';
+import patronRoutes from './patrons/routes';
+import {Book, Patron} from './database';
 
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', (req, res, next) => {
-  return res.status(200).send();
-});
-
-app.post('/', (req, res, next) => {
-  return res.status(200).send();
-});
-
-app.put('/', (req, res, next) => {
-  return res.status(200).send();
-});
-
-app.delete('/', (req, res, next) => {
-  return res.status(200).send();
-});
+app.use('/books', bookRoutes);
+app.use('/patrons', patronRoutes);
 
 module.exports = {
   start: function (options = {}) {
     this.server = app.listen(8000, () => {
       if (!options.quiet) console.log('server on port 8000');
+      if (options.callback) options.callback();
     });
   },
 
-  stop: function () {
+  stop: function (options = {}) {
+    if (options.callback) options.callback();
     this.server.close();
   }
 };
