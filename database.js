@@ -1,15 +1,23 @@
 import Sequelize from 'sequelize';
 
-var databaseName = (process.env.NODE_ENV !== 'test') ? 'exampleDB' : 'testDB';
+var databaseName = 'exampleDB';
 
+if (process.env.NODE_ENV === 'test') {
+  var inTestEnvironment = true;
+  databaseName = 'testDB';
+} 
+
+// DB
 var sequelize = new Sequelize(databaseName, 'root', '', {logging: false});
-var Books = sequelize.import('./books/book-model');
-// var Patrons = sequelize.import('./patrons/patron-model');
 
-sequelize.sync();
+// Models
+var Book = sequelize.import('./books/book-model');
+var Patron = sequelize.import('./patrons/patron-model');
+
+if (!inTestEnvironment) sequelize.sync();
 
 module.exports = {
   sequelize,
-  Books,
-  //Patrons
-}
+  Book,
+  Patron
+};
