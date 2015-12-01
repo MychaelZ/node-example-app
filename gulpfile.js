@@ -4,18 +4,6 @@ const jasmine = require('gulp-jasmine');
 const watch = require('gulp-watch');
 const coffee = require('gulp-coffee');
 
-gulp.task('test:unit', function () {
-  gulp
-    .src('spec/unit/**/*.js')
-    .pipe(jasmine({
-      config: {
-        spec_dir: 'spec/unit',
-        spec_files: ['**/*.js', '!helpers'],
-        helpers: ['helpers/**/*.js']
-      }
-    }));
-});
-
 gulp.task('test:e2e', function () {
   gulp
     .src('spec/e2e/**/*.js')
@@ -36,24 +24,42 @@ gulp.task('compile:e2e', function () {
     .pipe(gulp.dest('spec/e2e/helpers'));
 
   gulp
-    .src('spec-coffee/e2e/*.coffee')
-    .pipe(watch('spec-coffee/e2e/*.coffee'))
+    .src('spec-coffee/e2e/book-spec/*.coffee')
+    .pipe(watch('spec-coffee/e2e/book-spec/*.coffee'))
     .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('spec/e2e'));  
+    .pipe(gulp.dest('spec/e2e/book-spec'));
+
+  gulp
+    .src('spec-coffee/e2e/patron-spec/*.coffee')
+    .pipe(watch('spec-coffee/e2e/patron-spec/*.coffee'))
+    .pipe(coffee({bare: true}))
+    .pipe(gulp.dest('spec/e2e/patron-spec'));
+
+  gulp
+    .src('spec-coffee/*.coffee')
+    .pipe(watch('spec-coffee/*.coffee'))
+    .pipe(coffee({bare: true}))
+    .pipe(gulp.dest('spec'));    
 });
 
-gulp.task('compile:unit', function () {
+gulp.task('transpile:books', function () {
   gulp
-    .src('spec-coffee/unit/helpers/*.coffee')
-    .pipe(watch('spec-coffee/unit/helpers/*.coffee'))
-    .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('spec/e2e/helpers'));
+    .src(['books/**/*.js'])
+    .pipe(watch(['books/**/*.js']))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('build/books'));
+});
 
+gulp.task('transpile:patrons', function () {
   gulp
-    .src('spec-coffee/unit/*.coffee')
-    .pipe(watch('spec-coffee/unit/*.coffee'))
-    .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('spec/e2e'));  
+    .src(['patrons/**/*.js'])
+    .pipe(watch(['patrons/**/*.js']))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('build/patrons'));
 });
 
 gulp.task('transpile:server', function () {
@@ -66,5 +72,5 @@ gulp.task('transpile:server', function () {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['compile:unit', 'compile:e2e', 'transpile:server']);
+gulp.task('build', ['compile:e2e', 'transpile:server', 'transpile:books', 'transpile:patrons']);
 
