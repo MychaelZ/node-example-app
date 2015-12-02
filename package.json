@@ -1,10 +1,11 @@
 {
   "name": "node-example-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Library API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test:e2e",
+    "start": "gulp start"
   },
   "author": "",
   "license": "ISC",
@@ -23,9 +24,9 @@
     "gulp-babel": "^6.1.1",
     "gulp-coffee": "^2.3.1",
     "gulp-jasmine": "^2.2.1",
+    "gulp-nodemon": "^2.0.4",
     "gulp-watch": "^4.3.5",
     "jasmine": "^2.3.2",
-    "jasmine-node": "^1.14.5",
-    "sandboxed-module": "^0.3.0"
+    "jasmine-node": "^1.14.5"
   }
 }
