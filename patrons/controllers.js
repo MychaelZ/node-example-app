@@ -1,5 +1,4 @@
 import { Patron, Book } from './../database';
-import Promise from 'bluebird';
 import { filterObject, sendData, sendError } from './../utils';
 
 module.exports = {
@@ -35,7 +34,7 @@ module.exports = {
           });
       })
       .then(sendData(res))
-      .catch(sendError(res, 'Could not find patron with that name'), 404);
+      .catch(sendError(res, 'Could not find patron with that name', 404));
   },
 
   createPatron: function (req, res, next) {

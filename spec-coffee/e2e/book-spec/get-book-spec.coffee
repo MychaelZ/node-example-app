@@ -8,7 +8,6 @@ describe 'GET /books', ->
     (err, res) ->
 
       book = if res.body then res.body[0] else {}
-
       expect(res.statusCode).toEqual(200)
       expect(res.body).toEqual(jasmine.any(Array))
       expect(book.author).toEqual('Musk')

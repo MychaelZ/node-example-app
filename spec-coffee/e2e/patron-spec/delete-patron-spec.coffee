@@ -7,6 +7,6 @@ describe 'DELETE /patrons', ->
 
   it 'should remove patron from database', (done) ->
     GET '/patrons/Theodore', (err, res) ->
-      expect(res.statusCode).toEqual(500)
+      expect(res.statusCode).toEqual(404)
       done()
   

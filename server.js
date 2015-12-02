@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import bookRoutes from './books/routes';
 import patronRoutes from './patrons/routes';
-import {Book, Patron} from './database';
 
 var app = express();
 

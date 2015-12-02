@@ -2,12 +2,12 @@
   "name": "node-example-app",
   "version": "1.0.0",
   "description": "Library API",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "gulp test:e2e",
     "start": "gulp start"
   },
-  "author": "",
+  "author": "MychaelZ",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.0.5",
