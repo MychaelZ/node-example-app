@@ -35,7 +35,7 @@ module.exports = {
           });
       })
       .then(sendData(res))
-      .catch(sendError(res, 'Could not find patron with that name'));
+      .catch(sendError(res, 'Could not find patron with that name'), 404);
   },
 
   createPatron: function (req, res, next) {
