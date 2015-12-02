@@ -1,5 +1,5 @@
 import { Book } from './../database';
-import { filterObject, sendData, sendError, spy } from './../utils';
+import { filterObject, sendData, sendError } from './../utils';
 import _ from 'underscore';
 
 module.exports = {
