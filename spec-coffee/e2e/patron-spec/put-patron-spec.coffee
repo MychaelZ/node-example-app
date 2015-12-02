@@ -7,7 +7,7 @@ describe 'PUT /patrons', ->
       expect(res.statusCode).toEqual(200)
       done()
 
-  it 'should store updated value in database', (done) ->
+  it 'should edit patron in database', (done) ->
     GET '/patrons/Leeroy', (err, res) ->
       body = if res.body then res.body else {}
       books = if body.books then body.books else {}

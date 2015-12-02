@@ -11,12 +11,12 @@ describe 'PUT /books', ->
     POST '/books', book, (err, res) ->
       done()
 
-  it 'should successfully send put request', (done) ->
+  it 'should successfully send PUT request', (done) ->
     PUT '/books?title=Sky%20Castle&author=Miner&keyword=Fantasy', {author: 'King'}, (err, res) ->
       expect(res.statusCode).toEqual(200)
       done()
 
-  it 'should edit the contents', (done) ->
+  it 'should edit book in database', (done) ->
     GET '/books?author=King', (err, res) ->
       book = if res.body then res.body[0] else {}
       expect(res.statusCode).toEqual(200)

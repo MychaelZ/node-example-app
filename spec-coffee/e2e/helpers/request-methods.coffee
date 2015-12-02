@@ -14,4 +14,4 @@ global.PUT = (path, data, callback) ->
 
 global.DELETE = (path, callback) ->
   options = {}
-  request.delete "http://localhost:8000#{path}", options, callback
+  request.delete "http://localhost:8000#{path}", {}, options, callback

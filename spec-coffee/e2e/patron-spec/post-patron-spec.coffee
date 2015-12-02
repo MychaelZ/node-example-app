@@ -1,5 +1,4 @@
 describe 'POST /patrons', ->
-  print = console.log
   patron = 
     name: 'Joe'
 
