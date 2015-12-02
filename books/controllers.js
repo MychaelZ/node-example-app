@@ -1,5 +1,5 @@
 import { Book } from './../database';
-import { filterObject, sendData, sendError } from './../utils';
+import { filterObject, sendData, sendError, spy } from './../utils';
 import _ from 'underscore';
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         where: query
       })
       .then(sendData(res))
-      .catch(sendError(res, 'Could not find book with that query'));
+      .catch(sendError(res, 'Could not find any book with that query'));
   },
 
   createBook: function (req, res, next) {
@@ -24,11 +24,13 @@ module.exports = {
       .catch(sendError(res, 'Could not save book to database'));
   },
 
-  checkOutBook: function (req, res, next) {
+  editBook: function (req, res, next) {
     var query = filterObject(req.query, ['author', 'title', 'keyword'], true);
+    var checkedOutBy = req.body.id ? {checkedOutBy: req.body.id} : {};
+    var newValues = _.extend(filterObject(req.body, ['author', 'title', 'keyword']), checkedOutBy);
 
     Book
-      .update({checkedOutBy: req.body.id}, {
+      .update(newValues, {
         where: query
       })
       .then(sendData(res))
@@ -46,6 +48,6 @@ module.exports = {
         return foundBook.destroy();
       })
       .then(sendData(res))
-      .catch(sendError(res, 'Could not find the book'));
+      .catch(sendError(res, 'Could not find or delete the book'));
   }
 };

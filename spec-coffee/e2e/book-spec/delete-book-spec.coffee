@@ -11,7 +11,6 @@ describe 'DELETE /books', ->
   it 'should not delete book without all parameters', (done) ->
     DELETE '/books?author=Meow', (err, res) ->
       expect(res.statusCode).toEqual(500)
-      expect(res.body).toEqual('Could not find the book')
       done()
 
   it 'should not have removed book from database without all parameters', (done) ->

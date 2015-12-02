@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { retrieveBook, createBook, checkOutBook, deleteBook } from './controllers';
+import { retrieveBook, createBook, editBook, deleteBook } from './controllers';
 
 var router = Router();
 
@@ -7,7 +7,7 @@ router.get('/', retrieveBook);
 
 router.post('/', createBook);
 
-router.put('/', checkOutBook);
+router.put('/', editBook);
 
 router.delete('/', deleteBook);
 
